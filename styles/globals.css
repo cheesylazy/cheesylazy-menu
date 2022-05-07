@@ -27,3 +27,28 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.menu_wrap {
+  position: absolute;
+  transition: all ease 3s;
+  transform: translateX(500px);
+}
+
+@keyframes walk1 {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: 0px;
+    top: 100%;
+  }
+}
+
+.walk1 {
+  position: relative;
+  animation-name: walk1;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+}
