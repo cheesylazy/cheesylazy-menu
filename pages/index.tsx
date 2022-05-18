@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react'
 interface HomeProps {
   vh: number
   isMobile: boolean
-  data: object
+  data: any
 }
 
 const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
-  const [display, setDisplay] = useState<String>('block')
+  const [display, setDisplay] = useState<string>('block')
 
   useEffect(() => {
     setTimeout(() => {
@@ -50,9 +50,9 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
             >
               SANDWICH
             </div>
-            {data?.sandwich.map((obj) => {
+            {data?.sandwich.map((obj, index) => {
               return (
-                <div className="menu mb-12">
+                <div className="menu mb-12" key={index}>
                   <div className="flex flex-wrap justify-between items-center mb-3">
                     <div className="text-3xl">{obj.title}</div>
                     <div className="text-xl">{obj.price}</div>
@@ -77,9 +77,9 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
               NON-SANDWICH
             </div>
 
-            {data?.['non-sandwich'].map((obj) => {
+            {data?.['non-sandwich'].map((obj, index) => {
               return (
-                <div className="menu mb-6">
+                <div className="menu mb-6" key={index}>
                   <div className="flex flex-wrap justify-between items-center mb-1">
                     <div className="text-3xl">{obj.title}</div>
                     <div className="text-xl">{obj.price}</div>
@@ -101,9 +101,9 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
             >
               DRINK
             </div>
-            {data?.['drink'].map((obj) => {
+            {data?.['drink'].map((obj, index) => {
               return (
-                <div className="menu mb-6">
+                <div className="menu mb-6" key={index}>
                   <div className="flex flex-wrap justify-between items-center mb-1">
                     <div className="text-3xl">{obj.title}</div>
                     <div className="text-xl">{obj.price}</div>
