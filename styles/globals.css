@@ -52,3 +52,14 @@ a {
   animation-timing-function: linear;
   animation-direction: alternate;
 }
+
+.menu li {
+  padding-left: 15px;
+  font-size: 24px;
+}
+
+/*
+${
+            isMobile ? 'h-[68px] w-[283px]' : 'h-[205px] w-[849px]'
+          }
+*/
