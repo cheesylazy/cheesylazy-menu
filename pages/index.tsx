@@ -10,17 +10,17 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
-  const [display, setDisplay] = useState<string>('block')
+  const [display, setDisplay] = useState<string>('none')
 
   useEffect(() => {
-    setTimeout(() => {
-      setDisplay('none')
-    }, 2000)
+    // setTimeout(() => {
+    //   setDisplay('none')
+    // }, 2000)
   }, [])
 
   return (
     <div
-      className={`w-full flex justify-center items-center `}
+      className={`w-full flex justify-center items-center`}
       style={{
         height: vh + 'px',
       }}
@@ -28,95 +28,51 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
       <div style={{ display: display }}>
         <Image src={'/eating_v3.gif'} width={100} height={180} />
       </div>
+
       <div
-        className={`w-full h-full ${isMobile ? 'p-3' : 'p-10'} pt-2`}
+        className={`w-full h-full ${isMobile ? 'p-4 pt-10' : 'p-10 pt-14'}`}
         style={{ display: display === 'none' ? 'block' : 'none' }}
       >
-        <header
-          className={`relative max-w-[640px] w-[70vw] max-h-[154px] h-[18vw] m-auto ${
-            isMobile ? 'mb-6' : ''
-          }`}
-        >
-          <Image src={'/logo.png'} layout="fill" objectFit="fill" />
-        </header>
-
         <main className={`flex flex-wrap w-full`}>
-          {/* SADNWICH */}
-          <div className={`${isMobile ? 'w-[100%]' : 'w-[50%] p-10'}`}>
-            <div
-              className={`${
-                isMobile ? 'text-3xl' : 'text-7xl'
-              } mb-7 border-b border-solid border-black`}
-            >
-              SANDWICH
-            </div>
-            {data?.sandwich.map((obj, index) => {
-              return (
-                <div className="menu mb-12" key={index}>
-                  <div className="flex flex-wrap justify-between items-center mb-3">
-                    <div className="text-3xl">{obj.title}</div>
-                    <div className="text-xl">{obj.price}</div>
-                  </div>
-
-                  <li>{obj.bread}</li>
-                  <li>{obj.sauce}</li>
-                  <li>{obj.ingredients}</li>
-                  {obj.etc && <li>{obj.etc}</li>}
+          {Object.keys(data).map((type, index) => {
+            return (
+              <div
+                className={`${isMobile ? 'w-[100%]' : 'w-[50%]'}`}
+                key={index}
+              >
+                <div
+                  className={`${
+                    isMobile ? 'text-3xl' : 'text-6xl'
+                  } mb-7 font-[Montserrat] font-bold`}
+                >
+                  {type.toUpperCase()}
                 </div>
-              )
-            })}
-          </div>
+                {data?.[type].map((obj, index) => {
+                  return (
+                    <div
+                      className="pl-8 menu mb-12 font-[NanumSquareB]"
+                      key={index}
+                    >
+                      <div className="mb-3">
+                        <span className="text-4xl font-semibold">
+                          {obj.title}
+                        </span>
+                        <span className="pl-10 text-4xl font-semibold">
+                          {numberWithCommas(obj.price)}원
+                        </span>
+                      </div>
 
-          {/* NON - SADNWICH */}
-          <div className={`${isMobile ? 'w-[100%] mb-10' : 'w-[50%] p-10'}`}>
-            <div
-              className={`${
-                isMobile ? 'text-3xl mt-5' : 'text-7xl'
-              } mb-7 border-b border-solid border-black`}
-            >
-              NON-SANDWICH
-            </div>
-
-            {data?.['non-sandwich'].map((obj, index) => {
-              return (
-                <div className="menu mb-6" key={index}>
-                  <div className="flex flex-wrap justify-between items-center mb-1">
-                    <div className="text-3xl">{obj.title}</div>
-                    <div className="text-xl">{obj.price}</div>
-                  </div>
-
-                  {obj.bread && <li>{obj.bread}</li>}
-                  {obj.sauce && <li>{obj.sauce}</li>}
-                  {obj.ingredients && <li>{obj.ingredients}</li>}
-                  {obj.etc && <li>{obj.etc}</li>}
-                </div>
-              )
-            })}
-
-            {/* DRINK */}
-            <div
-              className={`${
-                isMobile ? 'text-3xl mt-16' : 'text-7xl mt-8'
-              } mb-7 border-b border-solid border-black`}
-            >
-              DRINK
-            </div>
-            {data?.['drink'].map((obj, index) => {
-              return (
-                <div className="menu mb-6" key={index}>
-                  <div className="flex flex-wrap justify-between items-center mb-1">
-                    <div className="text-3xl">{obj.title}</div>
-                    <div className="text-xl">{obj.price}</div>
-                  </div>
-
-                  {obj.bread && <li>{obj.bread}</li>}
-                  {obj.sauce && <li>{obj.sauce}</li>}
-                  {obj.ingredients && <li>{obj.ingredients}</li>}
-                  {obj.etc && <li>{obj.etc}</li>}
-                </div>
-              )
-            })}
-          </div>
+                      {obj.description && (
+                        <div className="whitespace-pre-line text-2xl font-[NanumSquareR] text-gray-600">
+                          {obj.description}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })}
         </main>
       </div>
     </div>
@@ -133,4 +89,8 @@ export async function getServerSideProps(context) {
   return {
     props: { data: res },
   }
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
