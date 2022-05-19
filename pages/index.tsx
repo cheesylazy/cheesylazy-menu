@@ -28,7 +28,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
       }}
     >
       <div style={{ display: display }}>
-        <Image src={'/eating_v2.gif'} width={100} height={180} />
+        <Image src={'/eating_v2.gif'} width={324} height={576} />
       </div>
 
       <div
