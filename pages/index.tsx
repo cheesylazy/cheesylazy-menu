@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
+
+import harbang from '../public/eating_v3.gif'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
@@ -7,9 +9,10 @@ interface HomeProps {
   vh: number
   isMobile: boolean
   data: any
+  staticImage: any
 }
 
-const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
+const Home: NextPage<HomeProps> = ({ vh, isMobile, data, staticImage }) => {
   const [display, setDisplay] = useState<string>('block')
   const [language, setLanguage] = useState<string>('KO')
   const [title, setTitle] = useState<string>(data.title)
@@ -28,7 +31,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
       }}
     >
       <div style={{ display: display }}>
-        <Image src={'/eating_v3.gif'} width={324} height={576} />
+        <Image src={harbang} width={324} height={576} />
       </div>
 
       <div
@@ -136,7 +139,7 @@ export async function getServerSideProps(context) {
   ).json()
 
   return {
-    props: { data: res },
+    props: { data: res, staticImage: harbang },
   }
 }
 
