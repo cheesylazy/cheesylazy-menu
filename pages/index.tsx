@@ -10,14 +10,14 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
-  const [display, setDisplay] = useState<string>('none')
+  const [display, setDisplay] = useState<string>('block')
   const [language, setLanguage] = useState<string>('KO')
   const [title, setTitle] = useState<string>(data.title)
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   setDisplay('none')
-    // }, 2000)
+    setTimeout(() => {
+      setDisplay('none')
+    }, 2000)
   }, [])
 
   return (
