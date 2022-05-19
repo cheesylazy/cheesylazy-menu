@@ -17,7 +17,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
   useEffect(() => {
     setTimeout(() => {
       setDisplay('none')
-    }, 2000)
+    }, 1950)
   }, [])
 
   return (
@@ -28,7 +28,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
       }}
     >
       <div style={{ display: display }}>
-        <Image src={'/eating_v3.gif'} width={100} height={180} />
+        <Image src={'/eating_v2.gif'} width={100} height={180} />
       </div>
 
       <div
