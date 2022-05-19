@@ -36,7 +36,10 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
           isMobile ? 'top-[40px] right-2' : 'top-[60px] right-12'
         } `}
       >
-        <div className="switch">
+        <div
+          className="switch"
+          style={{ display: display === 'none' ? 'block' : 'none' }}
+        >
           <input
             id="language-toggle"
             className="check-toggle check-toggle-round-flat"

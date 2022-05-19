@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>CHEESYLAZY</title>
+        <title>CHEESYLAZY MENU</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
