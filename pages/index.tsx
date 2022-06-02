@@ -15,7 +15,6 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ vh, isMobile, data, staticImage }) => {
   const [display, setDisplay] = useState<string>('block')
   const [language, setLanguage] = useState<string>('KO')
-  const [title, setTitle] = useState<string>(data.title)
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,7 +31,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data, staticImage }) => {
     >
       <div style={{ display: display }}>
         <Image
-          src={staticImage}
+          src={harbang}
           width={324}
           height={576}
           priority={true}
