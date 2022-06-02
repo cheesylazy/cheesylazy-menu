@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 
-import harbang from '../public/eating_v3.gif'
+import harbang from '../public/eating_v4.gif'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
