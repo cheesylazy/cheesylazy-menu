@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 interface HomeProps {
   vh: number
   isMobile: boolean
-  data: any
+  data: object
   staticImage: any
 }
 
@@ -31,7 +31,13 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data, staticImage }) => {
       }}
     >
       <div style={{ display: display }}>
-        <Image src={harbang} width={324} height={576} />
+        <Image
+          src={staticImage}
+          width={324}
+          height={576}
+          priority={true}
+          alt="cheesylazy"
+        />
       </div>
 
       <div
