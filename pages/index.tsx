@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 interface HomeProps {
   vh: number
   isMobile: boolean
-  data: object
+  data: any
   staticImage: any
 }
 
