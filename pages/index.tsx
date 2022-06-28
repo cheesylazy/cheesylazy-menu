@@ -15,7 +15,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
   useEffect(() => {
     const init = async () => {
       const res = await (
-        await fetch(`https://api.408.co.kr/cheesylazy/menu`)
+        await fetch(`https://api.408.co.kr/cheesylazy/menu/`)
       ).json()
       setData(res)
     }
@@ -34,7 +34,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
       }}
     >
       <div style={{ display: display === 'none' ? 'none' : 'block' }}>
-        <Image src={'/eating_v4.gif'} width={324} height={576} />
+        <Image src={'/eating_v3.gif'} width={324} height={576} />
       </div>
 
       <div
@@ -93,11 +93,26 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
                       key={index}
                     >
                       <div className="mb-1">
-                        <span
-                          className={`${isMobile ? 'text-2xl' : 'text-3xl'}`}
+                        <a
+                          href={obj.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`${
+                            isMobile ? 'text-2xl' : 'text-3xl'
+                          } relative`}
                         >
                           {title}
-                        </span>
+
+                          {obj.link && obj.link.length > 1 && (
+                            <a href={obj.link} target="_blank" rel="noreferrer">
+                              <Image
+                                src="/link_image.png"
+                                width={`${isMobile ? 20 : 25} `}
+                                height={`${isMobile ? 20 : 25} `}
+                              />
+                            </a>
+                          )}
+                        </a>
                         <span
                           className={`${
                             isMobile ? 'text-2xl' : 'text-3xl pl-10'
@@ -116,6 +131,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
                           className={` ${
                             isMobile ? 'text-xl' : 'text-2xl'
                           } whitespace-pre-line font-[NanumSquareR] text-gray-600`}
+                          style={{ marginTop: '5px' }}
                         >
                           {language === 'KO'
                             ? obj.description
