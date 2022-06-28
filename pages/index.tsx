@@ -1,23 +1,25 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
-
-import harbang from '../public/eating_v4.gif'
 import { useEffect, useState } from 'react'
 
-//<Image src={harbang} width={324} height={576} />
 interface HomeProps {
   vh: number
   isMobile: boolean
-  data: any
-  content: string
 }
 
-const Home: NextPage<HomeProps> = ({ vh, isMobile, data, content }) => {
-  const [display, setDisplay] = useState<string>('ready')
+const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
+  const [display, setDisplay] = useState<string>('block')
+  const [data, setData] = useState({})
   const [language, setLanguage] = useState<string>('KO')
 
   useEffect(() => {
-    setDisplay('block')
+    const init = async () => {
+      const res = await (
+        await fetch(`https://api.408.co.kr/cheesylazy/menu`)
+      ).json()
+      setData(res)
+    }
+    init()
 
     setTimeout(() => {
       setDisplay('none')
@@ -32,11 +34,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data, content }) => {
       }}
     >
       <div style={{ display: display === 'none' ? 'none' : 'block' }}>
-        {display === 'ready' ? (
-          <div className="w-10 h-10 bg-black">{content}</div>
-        ) : (
-          <Image src={harbang} width={324} height={576} />
-        )}
+        <Image src={'/eating_v4.gif'} width={324} height={576} />
       </div>
 
       <div
@@ -138,15 +136,15 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data, content }) => {
 
 export default Home
 
-export async function getServerSideProps(context) {
-  const res = await (
-    await fetch(`https://api.408.co.kr/cheesylazy/menu`)
-  ).json()
+// export async function getServerSideProps(context) {
+//   const res = await (
+//     await fetch(`https://api.408.co.kr/cheesylazy/menu`)
+//   ).json()
 
-  return {
-    props: { data: res, content: 'cheesylazy' },
-  }
-}
+//   return {
+//     props: { data: res, content: 'cheesylazy' },
+//   }
+// }
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
