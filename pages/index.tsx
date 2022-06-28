@@ -4,17 +4,21 @@ import Image from 'next/image'
 import harbang from '../public/eating_v4.gif'
 import { useEffect, useState } from 'react'
 
+//<Image src={harbang} width={324} height={576} />
 interface HomeProps {
   vh: number
   isMobile: boolean
   data: any
+  content: string
 }
 
-const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
-  const [display, setDisplay] = useState<string>('block')
+const Home: NextPage<HomeProps> = ({ vh, isMobile, data, content }) => {
+  const [display, setDisplay] = useState<string>('ready')
   const [language, setLanguage] = useState<string>('KO')
 
   useEffect(() => {
+    setDisplay('block')
+
     setTimeout(() => {
       setDisplay('none')
     }, 2100)
@@ -22,13 +26,17 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile, data }) => {
 
   return (
     <div
-      className={`w-full flex justify-center items-center`}
+      className={`w-full flex justify-center items-center h-10`}
       style={{
         height: vh + 'px',
       }}
     >
-      <div style={{ display: display }}>
-        <Image src={harbang} width={324} height={576} />
+      <div style={{ display: display === 'none' ? 'none' : 'block' }}>
+        {display === 'ready' ? (
+          <div className="w-10 h-10 bg-black">{content}</div>
+        ) : (
+          <Image src={harbang} width={324} height={576} />
+        )}
       </div>
 
       <div
@@ -136,7 +144,7 @@ export async function getServerSideProps(context) {
   ).json()
 
   return {
-    props: { data: res },
+    props: { data: res, content: 'cheesylazy' },
   }
 }
 
