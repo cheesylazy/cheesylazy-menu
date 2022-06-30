@@ -93,26 +93,11 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
                       key={index}
                     >
                       <div className="mb-1">
-                        <a
-                          href={obj.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className={`${
-                            isMobile ? 'text-2xl' : 'text-3xl'
-                          } relative`}
+                        <span
+                          className={`${isMobile ? 'text-2xl' : 'text-3xl'}`}
                         >
                           {title}
-
-                          {obj.link && obj.link.length > 1 && (
-                            <a href={obj.link} target="_blank" rel="noreferrer">
-                              <Image
-                                src="/link_image.png"
-                                width={`${isMobile ? 20 : 25} `}
-                                height={`${isMobile ? 20 : 25} `}
-                              />
-                            </a>
-                          )}
-                        </a>
+                        </span>
                         <span
                           className={`${
                             isMobile ? 'text-2xl' : 'text-3xl pl-10'
@@ -133,9 +118,11 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
                           } whitespace-pre-line font-[NanumSquareR] text-gray-600`}
                           style={{ marginTop: '5px' }}
                         >
-                          {language === 'KO'
-                            ? obj.description
-                            : obj.description_en}
+                          {language === 'KO' ? (
+                            <>{convert(obj.description)}</>
+                          ) : (
+                            obj.description_en
+                          )}
                         </div>
                       )}
                     </div>
@@ -164,4 +151,20 @@ export default Home
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+const convert = (str: string) => {
+  const converts = str.match(/\(.*?\)/g)
+
+  if (!converts) {
+    return str
+  }
+
+  for (let text of converts) {
+    let [content, link] = text.replace('(', '').replace(')', '').split('#')
+    let link_text = `<a href=${link} target='_blank' class='underline'>${content}</a>`
+    str = str.replace(text, link_text)
+  }
+
+  return <div dangerouslySetInnerHTML={{ __html: str }} />
 }
