@@ -77,10 +77,10 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
               >
                 <div
                   className={`${
-                    isMobile ? 'text-4xl mb-4' : 'text-5xl mb-7'
+                    isMobile ? 'text-4xl text-[32px] mb-4' : 'text-5xl mb-7'
                   } font-[Montserrat]`}
                 >
-                  {type.toUpperCase()}
+                  {type === 'drink' ? 'DRINK & DESSERT' : type.toUpperCase()}
                 </div>
 
                 {data?.[type].map((obj, index) => {
