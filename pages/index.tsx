@@ -17,6 +17,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
       const res = await (
         await fetch(`https://api.408.co.kr/cheesylazy/menu/`)
       ).json()
+      console.log(res)
       setData(res)
     }
     init()
@@ -31,15 +32,17 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
       className={`w-full flex justify-center items-center h-10`}
       style={{
         height: vh + 'px',
+
+        backgroundColor: display === 'none' ? '' : 'rgba(246, 229, 141,0.26)',
       }}
     >
       <div style={{ display: display === 'none' ? 'none' : 'block' }}>
         <Image src={'/eating_v3.gif'} width={324} height={576} />
       </div>
-
+      {/* 언어 토글 */}
       <div
         className={`absolute ${
-          isMobile ? 'top-[40px] right-2' : 'top-[60px] right-12'
+          isMobile ? 'top-[55px] right-2' : 'top-[40px] right-12'
         } `}
       >
         <div
@@ -64,15 +67,25 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
         </div>
       </div>
 
+      {/* 실질적 메뉴판 */}
       <div
-        className={`w-full h-full ${isMobile ? 'p-4 pt-10' : 'p-10 pt-14'}`}
-        style={{ display: display === 'none' ? 'block' : 'none' }}
+        className={`w-full h-full`}
+        style={{
+          display: display === 'none' ? 'block' : 'none',
+        }}
       >
-        <main className={`flex flex-wrap w-full`}>
+        <main
+          className={`flex flex-wrap w-full pt-10`}
+          style={{
+            backgroundColor: 'rgba(246, 229, 141,0.26)',
+          }}
+        >
           {Object.keys(data).map((type, index) => {
             return (
               <div
-                className={`${isMobile ? 'w-[100%] mb-10' : 'w-[50%]'}`}
+                className={`${
+                  isMobile ? 'w-[100%]' : 'w-[50%] min-w-[550px]'
+                } ${isMobile ? 'p-4' : 'px-10 pb-2'}`}
                 key={index}
               >
                 <div
@@ -80,7 +93,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
                     isMobile ? 'text-4xl text-[32px] mb-4' : 'text-5xl mb-7'
                   } font-[Montserrat]`}
                 >
-                  {type === 'drink' ? 'DRINK & DESSERT' : type.toUpperCase()}
+                  {type.toUpperCase()}
                 </div>
 
                 {data?.[type].map((obj, index) => {
@@ -88,7 +101,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
                   return (
                     <div
                       className={`${
-                        isMobile ? 'pl-5 mb-8' : 'pl-8 mb-10'
+                        isMobile ? 'ml-3 mb-5' : 'ml-5 mb-10'
                       } font-[NanumSquareB]`}
                       key={index}
                     >
@@ -100,7 +113,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
                         </span>
                         <span
                           className={`${
-                            isMobile ? 'text-2xl' : 'text-3xl pl-10'
+                            isMobile ? 'text-2xl' : 'text-3xl ml-10'
                           } `}
                         >
                           {isMobile && <br></br>}
@@ -155,6 +168,10 @@ function numberWithCommas(x) {
 
 const convert = (str: string) => {
   const converts = str.match(/\(.*?\)/g)
+
+  if (!str.includes('#')) {
+    return str
+  }
 
   if (!converts) {
     return str
