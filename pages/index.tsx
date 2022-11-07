@@ -7,6 +7,14 @@ interface HomeProps {
   isMobile: boolean
 }
 
+const type2Title = {
+  food: '1. FOOD',
+  side: '2. SIDE',
+  drink: '3. DRINK',
+  'combo meal': 'COMBO MEAL',
+  'ice cream': 'ICE CREAM',
+}
+
 const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
   const [display, setDisplay] = useState<string>('block')
   const [data, setData] = useState({})
@@ -91,9 +99,9 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
                 <div
                   className={`${
                     isMobile ? 'text-4xl text-[32px] mb-4' : 'text-5xl mb-7'
-                  } font-[Montserrat]`}
+                  } font-[Montserrat] `}
                 >
-                  {type.toUpperCase()}
+                  <span className="">{type2Title[type]}</span>
                 </div>
 
                 {data?.[type].map((obj, index) => {
