@@ -3,22 +3,22 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-weight: 800;
-  src: url('../public/font/Montserrat-Italic-VariableFont_wght.ttf')
-    format('truetype');
+  src: url("../public/font/Montserrat-Italic-VariableFont_wght.ttf")
+    format("truetype");
 }
 
 @font-face {
-  font-family: 'NanumSquareL';
+  font-family: "NanumSquareL";
   font-weight: 100;
-  src: url('../public/font/NanumSquareL.ttf') format('truetype');
+  src: url("../public/font/NanumSquareL.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'NanumSquareB';
+  font-family: "NanumSquareB";
   font-weight: 200;
-  src: url('../public/font/NanumSquare_acEB.ttf') format('truetype');
+  src: url("../public/font/NanumSquare_acEB.ttf") format("truetype");
 }
 
 html,
@@ -93,7 +93,7 @@ ${
   position: absolute;
   top: 14px;
   pointer-events: none;
-  font-family: 'Helvetica', Arial, sans-serif;
+  font-family: "Helvetica", Arial, sans-serif;
   font-weight: bold;
   font-size: 12px;
   text-transform: uppercase;
@@ -153,7 +153,7 @@ input.check-toggle-round-flat + label:before,
 input.check-toggle-round-flat + label:after {
   display: block;
   position: absolute;
-  content: '';
+  content: "";
 }
 
 input.check-toggle-round-flat + label:before {
@@ -211,4 +211,8 @@ input.check-toggle-round-flat:checked + label:after {
   border-radius: 50px;
   text-shadow: -12px 12px 9.8px rgba(255, 69, 0, 0.7), 21px -18.1px 7.3px #fff,
     -18.1px -27.3px 30px #fff;
+}
+
+#link_text {
+  color: #ff4400;
 }
