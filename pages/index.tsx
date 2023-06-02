@@ -8,10 +8,9 @@ interface HomeProps {
 }
 
 const type2Title = {
-  food: "1. FOOD",
+  sandwich: "1. FOOD",
   side: "2. SIDE",
   drink: "3. DRINK",
-  "combo meal": "COMBO MEAL",
   "ice cream": "ICE CREAM",
 };
 
