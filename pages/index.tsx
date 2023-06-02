@@ -23,7 +23,7 @@ const Home: NextPage<HomeProps> = ({ vh, isMobile }) => {
   useEffect(() => {
     const init = async () => {
       const res = await (
-        await fetch(`https://api.408.co.kr/cheesylazy/menu/`)
+        await fetch(`https://api.commin.co/cheesylazy/menu/`)
       ).json();
       setData(res);
     };
